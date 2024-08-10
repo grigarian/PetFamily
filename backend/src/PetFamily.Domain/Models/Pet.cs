@@ -20,9 +20,9 @@ namespace PetFamily.Domain.Models
 
         public string Address { get; private set; }
 
-        public string Weight { get; private set; }
+        public double Weight { get; private set; }
 
-        public string Hight { get; private set; }
+        public double Hight { get; private set; }
 
         public string PhoneNumber { get; private set; }
 
@@ -34,7 +34,7 @@ namespace PetFamily.Domain.Models
 
         public PetStatus PetStatus { get; private set; }
 
-        public ICollection<Requisite> Requisites { get; private set;}
+        public List<Requisite> Requisites { get; private set;}
 
         public DateTime CreationDate { get; private set; }
     }
