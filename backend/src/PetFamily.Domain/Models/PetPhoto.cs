@@ -6,6 +6,6 @@
 
         public string Path { get; private set; }
 
-        public bool IsHeadPhoto { get; private set; }
+        public bool IsMainPhoto { get; private set; }
     }
 }
