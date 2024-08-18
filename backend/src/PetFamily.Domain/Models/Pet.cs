@@ -37,5 +37,7 @@ namespace PetFamily.Domain.Models
         public List<Requisite> Requisites { get; private set;}
 
         public DateTime CreationDate { get; private set; }
+
+        public List<PetPhoto> PetPhotos { get; private set; }
     }
 }

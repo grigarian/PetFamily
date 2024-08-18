@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\backend",
+    "\\backend\\src",
+    "\\backend\\src\\PetFamily.Domain",
+    "\\backend\\src\\PetFamily.Domain\\Models"
   ],
+  "SelectedNode": "\\backend\\src\\PetFamily.Domain\\Models\\Pet.cs",
   "PreviewInSolutionExplorer": false
 }
