@@ -1,9 +1,14 @@
-﻿using PetFamily.Domain.Enums;
+﻿using PetFamily.Domain.Models.Shared;
 
-namespace PetFamily.Domain.Models
+namespace PetFamily.Domain.Models.PetModel
 {
-    public class Pet
+    public sealed class Pet
     {
+        private Pet()
+        {
+
+        }
+
         public Guid Id { get; private set; }
 
         public string Name { get; private set; }
@@ -34,10 +39,12 @@ namespace PetFamily.Domain.Models
 
         public PetStatus PetStatus { get; private set; }
 
-        public List<Requisite> Requisites { get; private set;}
+        public ListRequisites Requisites { get; private set; }
 
         public DateTime CreationDate { get; private set; }
 
         public List<PetPhoto> PetPhotos { get; private set; }
     }
+
+    
 }

@@ -1,4 +1,4 @@
-﻿namespace PetFamily.Domain.Models
+﻿namespace PetFamily.Domain.Models.PetModel
 {
     public class PetPhoto
     {

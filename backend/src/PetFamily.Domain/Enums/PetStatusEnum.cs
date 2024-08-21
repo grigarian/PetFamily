@@ -1,9 +1,10 @@
 ﻿namespace PetFamily.Domain.Enums
 {
-    public enum PetStatus
+    public enum PetStatusEnum
     {
         LookingForHelp,
         LookingForHome,
         FoundHome
     }
+
 }
