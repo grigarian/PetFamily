@@ -13,6 +13,11 @@ namespace PetFamily.Infrastructure.Configuration
 
             builder.HasKey(p => p.Id);
 
+            builder.Property(p => p.Id)
+                .HasConversion(
+                id => id.Value,
+                value => PetId.Create(value));
+
             builder.Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT);

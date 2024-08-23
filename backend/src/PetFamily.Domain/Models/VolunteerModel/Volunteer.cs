@@ -4,14 +4,20 @@ using PetFamily.Domain.Models.VolunteerModel;
 
 namespace PetFamily.Domain.Models.Volunteer
 {
-    public class Volunteer
+    public class Volunteer : Entity<VolunteerId>
     {
-        private Volunteer()
+        private Volunteer(VolunteerId id) : base(id)
         {
             
         }
 
-        public Guid ID { get; private set; }
+        private Volunteer(VolunteerId volunteerId, string name, string description) 
+            : base(volunteerId)
+        {
+            Name = name;
+            Description = description;
+        }
+
 
         public string Name { get; private set; }
 

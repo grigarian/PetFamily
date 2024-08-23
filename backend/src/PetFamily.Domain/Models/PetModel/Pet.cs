@@ -2,14 +2,18 @@
 
 namespace PetFamily.Domain.Models.PetModel
 {
-    public sealed class Pet
+    public sealed class Pet : Entity<PetId>
     {
-        private Pet()
+        private Pet(PetId id) : base(id)
         {
 
         }
 
-        public Guid Id { get; private set; }
+        private Pet(PetId petId, string name, string description) : base(petId)
+        {
+            Name = name;
+            Description = description;
+        }
 
         public string Name { get; private set; }
 
