@@ -11,11 +11,20 @@ namespace PetFamily.Domain.Models.Volunteer
             
         }
 
-        private Volunteer(VolunteerId volunteerId, string name, string description) 
+        private Volunteer(VolunteerId volunteerId, string name, string description, int workexp, int countPetFoundHome, int countPetLookiungForHome, int countPetBeingTreated, string phoneNumber,
+            ListSocialNetworks socialNetworks, ListRequisites requisites, List<Pet> pets) 
             : base(volunteerId)
         {
             Name = name;
             Description = description;
+            WorkExpirience = workexp;
+            CountPetFoundHome = countPetFoundHome;
+            CountPetLookingForHome = countPetLookiungForHome;
+            CountPetBeingTreated = countPetBeingTreated;
+            PhoneNumber = phoneNumber;
+            SocialNetworks = socialNetworks;
+            Requisites = requisites;
+            Pets = pets;
         }
 
 
