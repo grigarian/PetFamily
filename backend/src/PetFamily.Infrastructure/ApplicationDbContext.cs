@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using PetFamily.Domain.Models.PetModel;
 using PetFamily.Domain.Models.Volunteer;
 
 namespace PetFamily.Infrastructure
@@ -15,6 +14,7 @@ namespace PetFamily.Infrastructure
         {
             optionsBuilder.UseNpgsql(configuration.GetConnectionString(DATABASE));
             optionsBuilder.UseLoggerFactory(CreateLoggerFactory());
+            optionsBuilder.UseCamelCaseNamingConvention();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
