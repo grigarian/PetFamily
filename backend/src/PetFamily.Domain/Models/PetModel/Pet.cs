@@ -9,8 +9,8 @@ namespace PetFamily.Domain.Models.PetModel
 
         }
 
-        private Pet(PetId petId, string name, string description, string breed, string color, string healthInfo, string address, double weight, double hight, string phoneNumber,
-            bool isCastrated, DateOnly birthday, bool isVaccinated, PetStatus petStatus, ListRequisites requisite, DateTime creationDate, List<PetPhoto> petPhotos ) : base(petId)
+        private Pet(PetId petId, string name, string description, string breed, string color, string healthInfo, Address address, double weight, double hight, string phoneNumber,
+            bool isCastrated, DateOnly birthday, bool isVaccinated, PetStatus petStatus, Requisites requisite, DateTime creationDate, PetPhotos petPhotos ) : base(petId)
         {
             Name = name;
             Description = description;
@@ -43,7 +43,7 @@ namespace PetFamily.Domain.Models.PetModel
 
         public string HealthInfo { get; private set; }
 
-        public string Address { get; private set; }
+        public Address Address { get; private set; }
 
         public double Weight { get; private set; }
 
@@ -59,11 +59,11 @@ namespace PetFamily.Domain.Models.PetModel
 
         public PetStatus PetStatus { get; private set; }
 
-        public ListRequisites Requisites { get; private set; }
+        public Requisites Requisites { get; private set; }
 
         public DateTime CreationDate { get; private set; }
 
-        public List<PetPhoto> PetPhotos { get; private set; }
+        public PetPhotos PetPhotos { get; private set; }
     }
 
     

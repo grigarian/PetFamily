@@ -12,7 +12,7 @@ namespace PetFamily.Domain.Models.Volunteer
         }
 
         private Volunteer(VolunteerId volunteerId, string name, string description, int workexp, int countPetFoundHome, int countPetLookiungForHome, int countPetBeingTreated, string phoneNumber,
-            ListSocialNetworks socialNetworks, ListRequisites requisites, List<Pet> pets) 
+            SocialNetworks socialNetworks, Requisites requisites, List<Pet> pets) 
             : base(volunteerId)
         {
             Name = name;
@@ -42,9 +42,9 @@ namespace PetFamily.Domain.Models.Volunteer
 
         public string PhoneNumber { get; private set; }
 
-        public ListSocialNetworks SocialNetworks { get; private set; }
+        public SocialNetworks SocialNetworks { get; private set; }
 
-        public ListRequisites Requisites { get; private set; }
+        public Requisites Requisites { get; private set; }
 
         public List<Pet> Pets { get; private set; }
     }
