@@ -92,15 +92,9 @@ namespace PetFamily.Infrastructure.Configuration
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_DATE_LENGHT);
 
-            builder.OwnsOne(p => p.PetStatus, pb =>
-            {
-                builder.OwnsOne(ps => ps.PetStatus, pse =>
-                {
-                    pse.Property(v => v.Value)
-                    .IsRequired()
-                    .HasConversion<string>();
-                });
-            });
+            builder.Property(p => p.PetStatus)
+                .HasConversion<string>()
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT);
 
 
             builder.OwnsOne(p => p.Requisites, rlb =>

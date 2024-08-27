@@ -31,18 +31,6 @@ namespace PetFamily.Infrastructure.Configuration
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_LOW_INT_LENGHT);
 
-            builder.Property(v => v.CountPetFoundHome)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_INT_LENGHT);
-
-            builder.Property(v => v.CountPetLookingForHome)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_INT_LENGHT);
-
-            builder.Property(v => v.CountPetBeingTreated)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_INT_LENGHT);
-
             builder.Property(v => v.PhoneNumber)
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_PHONENUMBER_LENGHT);

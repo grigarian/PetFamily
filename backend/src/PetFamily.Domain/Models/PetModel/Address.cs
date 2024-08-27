@@ -31,9 +31,14 @@ namespace PetFamily.Domain.Models.PetModel
         public static Result<Address> Create(string city, string street, string postalCode,
             string houseNumber, string apartamentNumber)
         {
-            if (string.IsNullOrWhiteSpace(city) || string.IsNullOrWhiteSpace(street) || string.IsNullOrWhiteSpace(postalCode)
-                || string.IsNullOrWhiteSpace(houseNumber))
-                    return "City, street, postalCode, houseNumber cannot be empty";
+            if (string.IsNullOrWhiteSpace(city))
+                return "City is invalir or empty";
+            if (string.IsNullOrWhiteSpace(street))
+                return "Street is invalir or empty";
+            if (string.IsNullOrWhiteSpace(postalCode))
+                return "PostalCode is invalir or empty";
+            if (string.IsNullOrWhiteSpace(houseNumber))
+                return "HouseNumber is invalir or empty";
 
             return new Address(city, street, postalCode, houseNumber, apartamentNumber);
         }

@@ -4,6 +4,6 @@ namespace PetFamily.Domain.Models.VolunteerModel
 {
     public record SocialNetworks
     {
-        public List<SocialNetwork> SocialNetwork { get; private set; }
+        public IReadOnlyList<SocialNetwork> SocialNetwork { get; private set; }
     }
 }

@@ -8,6 +8,10 @@ namespace PetFamily.Domain.Models.Shared
 {
     public class Requisites
     {
-        public List<Requisite> Requisite { get; private set; }
+        private Requisites()
+        {
+            
+        }
+        public IReadOnlyList<Requisite> Requisite { get; private set; }
     }
 }

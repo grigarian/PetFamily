@@ -1,4 +1,5 @@
-﻿using PetFamily.Domain.Models.Shared;
+﻿using PetFamily.Domain.Enums;
+using PetFamily.Domain.Models.Shared;
 
 namespace PetFamily.Domain.Models.PetModel
 {
@@ -9,8 +10,25 @@ namespace PetFamily.Domain.Models.PetModel
 
         }
 
-        private Pet(PetId petId, string name, string description, string breed, string color, string healthInfo, Address address, double weight, double hight, string phoneNumber,
-            bool isCastrated, DateOnly birthday, bool isVaccinated, PetStatus petStatus, Requisites requisite, DateTime creationDate, PetPhotos petPhotos ) : base(petId)
+        private Pet(
+            PetId petId, 
+            string name,
+            string description,
+            string breed,
+            string color,
+            string healthInfo,
+            Address address,
+            double weight,
+            double hight,
+            string phoneNumber,
+            bool isCastrated,
+            DateOnly birthday,
+            bool isVaccinated,
+            PetStatus petStatus,
+            Requisites requisite,
+            DateTime creationDate,
+            PetPhotos petPhotos )
+            : base(petId)
         {
             Name = name;
             Description = description;
@@ -57,7 +75,7 @@ namespace PetFamily.Domain.Models.PetModel
 
         public bool IsVaccinated { get; private set; }
 
-        public PetStatus PetStatus { get; private set; }
+        public PetStatusEnum PetStatus { get; private set; }
 
         public Requisites Requisites { get; private set; }
 
