@@ -19,8 +19,8 @@ namespace PetFamily.Domain.Models.Volunteer
             string description,
             int workexp,
             string phoneNumber,
-            SocialNetworks socialNetworks,
-            Requisites requisites) 
+            SocialNetworkList socialNetworks,
+            RequisiteList requisites) 
             : base(volunteerId)
         {
             Name = name;
@@ -40,9 +40,9 @@ namespace PetFamily.Domain.Models.Volunteer
 
         public string PhoneNumber { get; private set; }
 
-        public SocialNetworks SocialNetworks { get; private set; }
+        public SocialNetworkList SocialNetworks { get; private set; }
 
-        public Requisites Requisites { get; private set; }
+        public RequisiteList Requisites { get; private set; }
 
         public IReadOnlyList<Pet> Pets  => _pets;
 

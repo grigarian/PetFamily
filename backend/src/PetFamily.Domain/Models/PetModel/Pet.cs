@@ -24,8 +24,8 @@ namespace PetFamily.Domain.Models.PetModel
             bool isCastrated,
             DateOnly birthday,
             bool isVaccinated,
-            PetStatus petStatus,
-            Requisites requisite,
+            PetStatusEnum petStatus,
+            RequisiteList requisite,
             DateTime creationDate,
             PetPhotos petPhotos )
             : base(petId)
@@ -77,7 +77,7 @@ namespace PetFamily.Domain.Models.PetModel
 
         public PetStatusEnum PetStatus { get; private set; }
 
-        public Requisites Requisites { get; private set; }
+        public RequisiteList Requisites { get; private set; }
 
         public DateTime CreationDate { get; private set; }
 
