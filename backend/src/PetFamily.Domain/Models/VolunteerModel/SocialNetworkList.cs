@@ -6,7 +6,7 @@ namespace PetFamily.Domain.Models.VolunteerModel
     {
         private SocialNetworkList() {}
 
-        private SocialNetworkList(ICollection<SocialNetwork> socialNetworks) => SocialNetworks = socialNetworks.ToList();
+        private SocialNetworkList(IEnumerable<SocialNetwork> socialNetworks) => SocialNetworks = socialNetworks.ToList();
 
         public IReadOnlyList<SocialNetwork> SocialNetworks { get; }
     }

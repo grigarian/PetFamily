@@ -37,7 +37,7 @@ namespace PetFamily.Infrastructure.Configuration
 
             builder.OwnsOne(v => v.SocialNetworks, snlb =>
             {
-                snlb.ToJson();
+                snlb.ToJson("social_networks");
                 snlb.OwnsMany(sn => sn.SocialNetworks, snb =>
                 {
                     snb.Property(sn => sn.Name)
@@ -55,7 +55,7 @@ namespace PetFamily.Infrastructure.Configuration
 
             builder.OwnsOne(v => v.Requisites, rlb =>
             {
-                rlb.ToJson();
+                rlb.ToJson("requisites");
                 rlb.OwnsMany(r => r.Requisites, rb =>
                 {
                     rb.Property(r => r.Name)

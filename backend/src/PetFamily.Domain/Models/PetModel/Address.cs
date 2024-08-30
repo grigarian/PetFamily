@@ -33,10 +33,13 @@ namespace PetFamily.Domain.Models.PetModel
         {
             if (string.IsNullOrWhiteSpace(city))
                 return "City is invalir or empty";
+
             if (string.IsNullOrWhiteSpace(street))
                 return "Street is invalir or empty";
+
             if (string.IsNullOrWhiteSpace(postalCode))
                 return "PostalCode is invalir or empty";
+
             if (string.IsNullOrWhiteSpace(houseNumber))
                 return "HouseNumber is invalir or empty";
 

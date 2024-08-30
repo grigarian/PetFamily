@@ -109,7 +109,7 @@ namespace PetFamily.Infrastructure.Configuration
 
             builder.OwnsOne(p => p.Requisites, rlb =>
             {
-                rlb.ToJson();
+                rlb.ToJson("requsites");
                 rlb.OwnsMany(r => r.Requisites, rb =>
                 {
                     rb.Property(r => r.Name)
@@ -128,7 +128,7 @@ namespace PetFamily.Infrastructure.Configuration
 
             builder.OwnsOne(p => p.PetPhotos, plb =>
             {
-                plb.ToJson();
+                plb.ToJson("pet_photos");
                 plb.OwnsMany(pp => pp.PetPhoto, ppb =>
                 {
                     ppb.Property(pp => pp.Path)
