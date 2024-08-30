@@ -3,7 +3,7 @@
     public record RequisiteList
     {
         private RequisiteList() {}
-        private RequisiteList(ICollection<Requisite> requisites) => Requisites = requisites.ToList();
+        private RequisiteList(IEnumerable<Requisite> requisites) => Requisites = requisites.ToList();
         public IReadOnlyList<Requisite> Requisites { get; }
     }
 }
