@@ -1,11 +1,29 @@
-﻿namespace PetFamily.Domain.Models.PetModel
+﻿using PetFamily.Domain.Models.Shared;
+
+namespace PetFamily.Domain.Models.PetModel
 {
-    public class PetPhoto
+    public record PetPhoto
     {
-        public Guid Id { get; private set; }
+        private PetPhoto()
+        {
+            
+        }
+        public string Path { get;}
 
-        public string Path { get; private set; }
+        public bool IsMainPhoto { get;}
 
-        public bool IsMainPhoto { get; private set; }
+        private PetPhoto(string path, bool isMainPhoto)
+        {
+            Path = path;
+            IsMainPhoto = isMainPhoto;
+        }
+
+        public static Result<PetPhoto> Create (string path, bool isMainPhoto)
+        {
+            if (string.IsNullOrWhiteSpace(path) || path.Length > Constants.MAX_HIGH_TEXT_LENGHT)
+                return "Path is invalid or empty";
+
+            return new PetPhoto(path, isMainPhoto);
+        }
     }
 }

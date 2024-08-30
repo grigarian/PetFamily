@@ -31,51 +31,43 @@ namespace PetFamily.Infrastructure.Configuration
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_LOW_INT_LENGHT);
 
-            builder.Property(v => v.CountPetFoundHome)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_INT_LENGHT);
-
-            builder.Property(v => v.CountPetLookingForHome)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_INT_LENGHT);
-
-            builder.Property(v => v.CountPetBeingTreated)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_INT_LENGHT);
-
             builder.Property(v => v.PhoneNumber)
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_PHONENUMBER_LENGHT);
 
-            builder.OwnsOne(v => v.SocialNetworks, sb =>
+            builder.OwnsOne(v => v.SocialNetworks, snlb =>
             {
-                sb.ToJson();
-
-                sb.OwnsMany(s => s.SocialNetworks, snb =>
+                snlb.ToJson();
+                snlb.OwnsMany(sn => sn.SocialNetwork, snb =>
                 {
                     snb.Property(sn => sn.Name)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT);
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT)
+                    .HasColumnName("name");
 
                     snb.Property(sn => sn.Link)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGHT);
+                    .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGHT)
+                    .HasColumnName("link");
                 });
+                
             });
 
-            builder.OwnsOne(v => v.Requisites, rb =>
+            builder.OwnsOne(v => v.Requisites, rlb =>
             {
-                rb.ToJson();
-
-                rb.OwnsMany(r => r.Requisites, reb =>
+                rlb.ToJson();
+                rlb.OwnsMany(r => r.Requisite, rb =>
                 {
-                    reb.Property(req => req.Name)
+                    rb.Property(r => r.Name)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT);
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT)
+                    .HasColumnName("name");
 
-                    reb.Property(req => req.Description)
+                    rb.Property(r => r.Description)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGHT);
+                    .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGHT)
+                    .HasColumnName("description");
+
                 });
             });
 

@@ -1,4 +1,5 @@
-﻿using PetFamily.Domain.Models.PetModel;
+﻿using PetFamily.Domain.Enums;
+using PetFamily.Domain.Models.PetModel;
 using PetFamily.Domain.Models.Shared;
 using PetFamily.Domain.Models.VolunteerModel;
 
@@ -6,25 +7,28 @@ namespace PetFamily.Domain.Models.Volunteer
 {
     public class Volunteer : Entity<VolunteerId>
     {
+        private readonly List<Pet> _pets = [];
         private Volunteer(VolunteerId id) : base(id)
         {
             
         }
 
-        private Volunteer(VolunteerId volunteerId, string name, string description, int workexp, int countPetFoundHome, int countPetLookiungForHome, int countPetBeingTreated, string phoneNumber,
-            ListSocialNetworks socialNetworks, ListRequisites requisites, List<Pet> pets) 
+        private Volunteer(
+            VolunteerId volunteerId,
+            string name,
+            string description,
+            int workexp,
+            string phoneNumber,
+            SocialNetworkList socialNetworks,
+            RequisiteList requisites) 
             : base(volunteerId)
         {
             Name = name;
             Description = description;
             WorkExpirience = workexp;
-            CountPetFoundHome = countPetFoundHome;
-            CountPetLookingForHome = countPetLookiungForHome;
-            CountPetBeingTreated = countPetBeingTreated;
             PhoneNumber = phoneNumber;
             SocialNetworks = socialNetworks;
             Requisites = requisites;
-            Pets = pets;
         }
 
 
@@ -34,18 +38,18 @@ namespace PetFamily.Domain.Models.Volunteer
 
         public int WorkExpirience { get; private set; }
 
-        public int CountPetFoundHome { get; private set; }
-
-        public int CountPetLookingForHome { get; private set; }
-
-        public int CountPetBeingTreated { get; private set; }
-
         public string PhoneNumber { get; private set; }
 
-        public ListSocialNetworks SocialNetworks { get; private set; }
+        public SocialNetworkList SocialNetworks { get; private set; }
 
-        public ListRequisites Requisites { get; private set; }
+        public RequisiteList Requisites { get; private set; }
 
-        public List<Pet> Pets { get; private set; }
+        public IReadOnlyList<Pet> Pets  => _pets;
+
+        public int GetCountPetFoundHome() => _pets.Count(p => p.PetStatus == PetStatusEnum.FoundHome);
+
+        public int CountPetLookingForHome() => _pets.Count(p => p.PetStatus == PetStatusEnum.LookingForHome);
+
+        public int CountPetLookingForHelp() => _pets.Count(p => p.PetStatus == PetStatusEnum.LookingForHelp);
     }
 }
