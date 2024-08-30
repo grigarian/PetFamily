@@ -13,8 +13,8 @@ namespace PetFamily.Domain.Models.PetModel
         private Pet(
             PetId petId, 
             string name,
+            Type type,
             string description,
-            string breed,
             string color,
             string healthInfo,
             Address address,
@@ -31,8 +31,8 @@ namespace PetFamily.Domain.Models.PetModel
             : base(petId)
         {
             Name = name;
+            Type = type;
             Description = description;
-            Breed = breed;
             Color = color;
             HealthInfo = healthInfo;
             Address = address;
@@ -51,11 +51,9 @@ namespace PetFamily.Domain.Models.PetModel
 
         public string Name { get; private set; }
 
-        public string Type { get; private set; }
+        public Type Type { get; private set; }
 
         public string Description { get; private set; }
-
-        public string Breed { get; private set; }
 
         public string Color { get; private set; }
 

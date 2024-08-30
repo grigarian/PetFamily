@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PetFamily.Domain.Models.PetModel;
 using PetFamily.Domain.Models.Shared;
+using PetFamily.Domain.Models.SpeciesModel;
 
 namespace PetFamily.Infrastructure.Configuration
 {
@@ -26,9 +27,18 @@ namespace PetFamily.Infrastructure.Configuration
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGHT);
 
-            builder.Property(p => p.Breed)
+            builder.ComplexProperty(p => p.Type, tb => 
+            {
+                tb.Property(t => t.SpeciesId)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGHT);
+                .HasColumnName("species_id")
+                .HasConversion(id => id.Value,
+                value => SpeciesId.Create(value));
+
+                tb.Property(t => t.BreedId)
+                .IsRequired()
+                .HasColumnName("breed_id");
+            });
 
             builder.Property(p => p.Color)
                 .IsRequired()
@@ -100,7 +110,7 @@ namespace PetFamily.Infrastructure.Configuration
             builder.OwnsOne(p => p.Requisites, rlb =>
             {
                 rlb.ToJson();
-                rlb.OwnsMany(r => r.Requisite, rb =>
+                rlb.OwnsMany(r => r.Requisites, rb =>
                 {
                     rb.Property(r => r.Name)
                     .IsRequired()

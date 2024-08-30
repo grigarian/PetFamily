@@ -1,6 +1,4 @@
-﻿using PetFamily.Domain.Models.PetModel;
-
-namespace PetFamily.Domain.Models.VolunteerModel
+﻿namespace PetFamily.Domain.Models.VolunteerModel
 {
     public record VolunteerId
     {
