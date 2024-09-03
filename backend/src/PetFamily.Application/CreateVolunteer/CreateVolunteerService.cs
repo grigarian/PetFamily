@@ -38,6 +38,9 @@ namespace PetFamily.Application.CreateVolunteer
 
             await _volunteersRepositories.Add(volunteer.Value, cancellationToken);
 
+            if(volunteer.IsFailure)
+                return volunteer.Error;
+
             return volunteerId.Value;
         }
     }
