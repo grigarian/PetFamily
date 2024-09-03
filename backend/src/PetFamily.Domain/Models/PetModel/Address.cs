@@ -16,7 +16,7 @@ namespace PetFamily.Domain.Models.PetModel
 
         public string HouseNumber { get; }
 
-        public string? ApartNumber { get; }
+        public string ApartNumber { get; }
 
         private Address(string city, string street, string postalCode,
             string houseNumber, string apartamentNumber)
