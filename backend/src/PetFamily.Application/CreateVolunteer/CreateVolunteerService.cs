@@ -25,18 +25,18 @@ namespace PetFamily.Application.CreateVolunteer
 
             var requisites = RequisiteList.Create(requisitesSelect.Select(r => r.Value));
 
-            var volunteer = new Volunteer
+            var volunteer = Volunteer.Create
                 (
                     volunteerId,
                     request.Name,
                     request.Description,
                     request.Workexp,
                     request.PhoneNumber,
-                    socialNetworks,
-                    requisites
+                    socialNetworks.Value,
+                    requisites.Value
                 );
 
-            await _volunteersRepositories.Add(volunteer, cancellationToken);
+            await _volunteersRepositories.Add(volunteer.Value, cancellationToken);
 
             return volunteerId.Value;
         }

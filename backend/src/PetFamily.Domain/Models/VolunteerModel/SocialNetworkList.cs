@@ -11,7 +11,7 @@ namespace PetFamily.Domain.Models.VolunteerModel
 
         public IReadOnlyList<SocialNetwork> SocialNetworks { get; }
 
-        public static SocialNetworkList Create (IEnumerable<SocialNetwork> socialNetworks)
+        public static Result<SocialNetworkList> Create (IEnumerable<SocialNetwork> socialNetworks)
         {
             return new SocialNetworkList (socialNetworks);
         }
