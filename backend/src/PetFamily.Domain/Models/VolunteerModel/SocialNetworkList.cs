@@ -1,4 +1,5 @@
-﻿using PetFamily.Domain.Models.Volunteer;
+﻿using PetFamily.Domain.Models.Shared;
+using PetFamily.Domain.Models.Volunteer;
 
 namespace PetFamily.Domain.Models.VolunteerModel
 {
@@ -9,5 +10,10 @@ namespace PetFamily.Domain.Models.VolunteerModel
         private SocialNetworkList(IEnumerable<SocialNetwork> socialNetworks) => SocialNetworks = socialNetworks.ToList();
 
         public IReadOnlyList<SocialNetwork> SocialNetworks { get; }
+
+        public static SocialNetworkList Create (IEnumerable<SocialNetwork> socialNetworks)
+        {
+            return new SocialNetworkList (socialNetworks);
+        }
     }
 }

@@ -1,19 +1,18 @@
 ﻿using PetFamily.Domain.Enums;
 using PetFamily.Domain.Models.PetModel;
 using PetFamily.Domain.Models.Shared;
-using PetFamily.Domain.Models.VolunteerModel;
 
-namespace PetFamily.Domain.Models.Volunteer
+namespace PetFamily.Domain.Models.VolunteerModel
 {
     public class Volunteer : Entity<VolunteerId>
     {
         private readonly List<Pet> _pets = [];
         private Volunteer(VolunteerId id) : base(id)
         {
-            
+
         }
 
-        private Volunteer(
+        public Volunteer(
             VolunteerId volunteerId,
             string name,
             string description,
@@ -51,5 +50,38 @@ namespace PetFamily.Domain.Models.Volunteer
         public int CountPetLookingForHome() => _pets.Count(p => p.PetStatus == PetStatusEnum.LookingForHome);
 
         public int CountPetLookingForHelp() => _pets.Count(p => p.PetStatus == PetStatusEnum.LookingForHelp);
+
+        public static Result<Volunteer> Create (VolunteerId volunteerId,
+            string name,
+            string description,
+            int workexp,
+            string phoneNumber,
+            SocialNetworkList socialNetworks,
+            RequisiteList requisites)
+        {
+            if (volunteerId == null)
+                return "Id can not be empty";
+
+            if (string.IsNullOrEmpty(name) || name.Length > Constants.MAX_LOW_TEXT_LENGHT)
+                return "Name can not be empty or longer " + Constants.MAX_LOW_TEXT_LENGHT + "symbols";
+
+            if (string.IsNullOrEmpty(description) || description.Length > Constants.MAX_HIGH_TEXT_LENGHT)
+                return "Description can not be empty or longer " + Constants.MAX_HIGH_TEXT_LENGHT + "symbols";
+
+            if (workexp < 0)
+                return "Work expiriense cannot be less then 0";
+
+            if (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Length > Constants.MAX_PHONENUMBER_LENGHT)
+                return "Phone number can not be empty or longer " + Constants.MAX_PHONENUMBER_LENGHT + "symbols";
+
+            return new Volunteer(
+                volunteerId,
+                name,
+                description,
+                workexp,
+                phoneNumber,
+                socialNetworks,
+                requisites);
+        }
     }
 }
