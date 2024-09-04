@@ -1,4 +1,5 @@
-﻿using PetFamily.Domain.Models.Shared;
+﻿using CSharpFunctionalExtensions;
+using PetFamily.Domain.Models.Shared;
 using PetFamily.Domain.Models.Volunteer;
 
 namespace PetFamily.Domain.Models.VolunteerModel
@@ -11,9 +12,9 @@ namespace PetFamily.Domain.Models.VolunteerModel
 
         public IReadOnlyList<SocialNetwork> SocialNetworks { get; }
 
-        public static Result<SocialNetworkList> Create (IEnumerable<SocialNetwork> socialNetworks)
+        public static Result<SocialNetworkList, Error> Create (IEnumerable<SocialNetwork> socialNetworks)
         {
-            return new SocialNetworkList (socialNetworks);
+            return new SocialNetworkList(socialNetworks);
         }
     }
 }

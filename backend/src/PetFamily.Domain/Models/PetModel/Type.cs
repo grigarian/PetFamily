@@ -1,7 +1,6 @@
-﻿using PetFamily.Domain.Models.BreedModel;
+﻿using CSharpFunctionalExtensions;
 using PetFamily.Domain.Models.Shared;
 using PetFamily.Domain.Models.SpeciesModel;
-using System;
 
 namespace PetFamily.Domain.Models.PetModel
 {
@@ -21,10 +20,15 @@ namespace PetFamily.Domain.Models.PetModel
 
         public SpeciesId SpeciesId { get; }
 
-        public static Result<Type> Create(
-            Guid breedId,
-            SpeciesId speciesId)
+        public static Result<Type, Error> Create
+            (
+                Guid breedId,
+                SpeciesId speciesId
+            )
         {
+            if (breedId == Guid.Empty)
+                return Errors.General.ValueIsInvalid("breedId");
+
             return new Type(breedId, speciesId);
         }
     }

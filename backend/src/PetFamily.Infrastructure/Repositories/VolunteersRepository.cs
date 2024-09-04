@@ -1,15 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PetFamily.Application;
-using PetFamily.Domain.Models.Shared;
+﻿using CSharpFunctionalExtensions;
+using Microsoft.EntityFrameworkCore;
+using PetFamily.Application.Volunteers;
 using PetFamily.Domain.Models.VolunteerModel;
 
 namespace PetFamily.Infrastructure.Repositories
 {
-    public class VolunteersRepositories : IVolunteersRepositories
+    public class VolunteersRepository : IVolunteersRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public VolunteersRepositories(ApplicationDbContext dbContext)
+        public VolunteersRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -30,7 +30,7 @@ namespace PetFamily.Infrastructure.Repositories
                 .FirstOrDefaultAsync(v => v.Id == volunteerId);
 
             if(volunteer is null) 
-                return "Volunteer not found";
+                return Result.Failure<Volunteer>("Volunteer not found");
 
             return volunteer;
             
