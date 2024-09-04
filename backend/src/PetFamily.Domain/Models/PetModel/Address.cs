@@ -1,4 +1,5 @@
-﻿using PetFamily.Domain.Models.Shared;
+﻿using CSharpFunctionalExtensions;
+using PetFamily.Domain.Models.Shared;
 
 namespace PetFamily.Domain.Models.PetModel
 {
@@ -28,20 +29,20 @@ namespace PetFamily.Domain.Models.PetModel
             ApartNumber = apartamentNumber;
         }
 
-        public static Result<Address> Create(string city, string street, string postalCode,
+        public static Result<Address, Error> Create(string city, string street, string postalCode,
             string houseNumber, string apartamentNumber)
         {
             if (string.IsNullOrWhiteSpace(city))
-                return "City is invalir or empty";
+                return Errors.General.ValueIsInvalid("city");
 
             if (string.IsNullOrWhiteSpace(street))
-                return "Street is invalir or empty";
+                return Errors.General.ValueIsInvalid("street");
 
             if (string.IsNullOrWhiteSpace(postalCode))
-                return "PostalCode is invalir or empty";
+                return Errors.General.ValueIsInvalid("postalCode");
 
             if (string.IsNullOrWhiteSpace(houseNumber))
-                return "HouseNumber is invalir or empty";
+                return Errors.General.ValueIsInvalid("houseNumber");
 
             return new Address(city, street, postalCode, houseNumber, apartamentNumber);
         }

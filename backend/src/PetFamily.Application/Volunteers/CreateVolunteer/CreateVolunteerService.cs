@@ -1,29 +1,37 @@
-﻿using PetFamily.Domain.Models.Shared;
+﻿using CSharpFunctionalExtensions;
+using PetFamily.Domain.Models.Shared;
 using PetFamily.Domain.Models.Volunteer;
 using PetFamily.Domain.Models.VolunteerModel;
 
-namespace PetFamily.Application.CreateVolunteer
+namespace PetFamily.Application.Volunteers.CreateVolunteer
 {
     public class CreateVolunteerService
     {
-        private readonly IVolunteersRepositories _volunteersRepositories;
+        private readonly IVolunteersRepository _volunteersRepository
+            ;
 
-        public CreateVolunteerService(IVolunteersRepositories volunteersRepositories)
+        public CreateVolunteerService(IVolunteersRepository volunteersRepository)
         {
-            _volunteersRepositories = volunteersRepositories;
+            _volunteersRepository = volunteersRepository;
         }
 
-        public async Task<Result<Guid>> Create(CreateVolunteerRequest request, CancellationToken cancellationToken)
+        public async Task<Result<Guid, Error>> Create(CreateVolunteerRequest request, CancellationToken cancellationToken)
         {
             var volunteerId = VolunteerId.NewId();
 
             var socialNetworksSelect = request.SocialNetworks.Select(s => SocialNetwork.Create(s.Name, s.Link));
-            
+
             var socialNetworks = SocialNetworkList.Create(socialNetworksSelect.Select(s => s.Value));
+
+            if(socialNetworks.IsFailure)
+                return socialNetworks.Error;
 
             var requisitesSelect = request.Requisites.Select(r => Requisite.Create(r.Name, r.Description));
 
             var requisites = RequisiteList.Create(requisitesSelect.Select(r => r.Value));
+
+            if (requisites.IsFailure)
+                return requisites.Error;
 
             var volunteer = Volunteer.Create
                 (
@@ -36,9 +44,9 @@ namespace PetFamily.Application.CreateVolunteer
                     requisites.Value
                 );
 
-            await _volunteersRepositories.Add(volunteer.Value, cancellationToken);
+            await _volunteersRepository.Add(volunteer.Value, cancellationToken);
 
-            if(volunteer.IsFailure)
+            if (volunteer.IsFailure)
                 return volunteer.Error;
 
             return volunteerId.Value;

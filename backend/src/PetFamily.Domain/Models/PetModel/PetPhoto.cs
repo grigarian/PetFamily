@@ -1,4 +1,5 @@
-﻿using PetFamily.Domain.Models.Shared;
+﻿using CSharpFunctionalExtensions;
+using PetFamily.Domain.Models.Shared;
 
 namespace PetFamily.Domain.Models.PetModel
 {
@@ -18,10 +19,10 @@ namespace PetFamily.Domain.Models.PetModel
             IsMainPhoto = isMainPhoto;
         }
 
-        public static Result<PetPhoto> Create (string path, bool isMainPhoto)
+        public static Result<PetPhoto, Error> Create (string path, bool isMainPhoto)
         {
             if (string.IsNullOrWhiteSpace(path) || path.Length > Constants.MAX_HIGH_TEXT_LENGHT)
-                return "Path is invalid or empty";
+                return Errors.General.ValueIsInvalid("path");
 
             return new PetPhoto(path, isMainPhoto);
         }

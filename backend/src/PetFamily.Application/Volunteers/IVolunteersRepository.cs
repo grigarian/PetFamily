@@ -1,8 +1,8 @@
 ﻿using PetFamily.Domain.Models.VolunteerModel;
 
-namespace PetFamily.Application
+namespace PetFamily.Application.Volunteers
 {
-    public interface IVolunteersRepositories
+    public interface IVolunteersRepository
     {
         Task<Guid> Add(Volunteer volunteer, CancellationToken cancellationToken);
     }

@@ -1,9 +1,10 @@
-﻿using PetFamily.Domain.Models.PetModel;
+﻿using CSharpFunctionalExtensions;
+using CSharpFunctionalExtensions.ValueTasks;
 using PetFamily.Domain.Models.Shared;
 
 namespace PetFamily.Domain.Models.BreedModel
 {
-    public sealed class Breed : Entity<BreedId>
+    public sealed class Breed : Shared.Entity<BreedId>
     {
         private Breed(BreedId id) : base(id) { }
 
@@ -21,24 +22,24 @@ namespace PetFamily.Domain.Models.BreedModel
 
         public string Description { get; private set; }
 
-        public static Result<Breed> Create(BreedId id,
+        public static Result<Breed, Error> Create(BreedId id,
             string name,
             string description)
         {
             if (id == null)
-                return "Id can not be empty";
+                return Errors.General.ValueIsInvalid("id");
 
             if (string.IsNullOrWhiteSpace(name))
-                return "Name can not be empty";
+                return Errors.General.ValueIsInvalid("name");
 
             if (string.IsNullOrWhiteSpace(description))
-                return "Description can not be empty";
+                return Errors.General.ValueIsInvalid("description");
 
             if (name.Length > Constants.MAX_LOW_TEXT_LENGHT)
-                return "Name max lenghst: " + Convert.ToString(Constants.MAX_LOW_TEXT_LENGHT);
+                return Errors.General.ValueIsRequired("name");
 
             if (description.Length > Constants.MAX_HIGH_TEXT_LENGHT)
-                return "Description max lenghst: " + Convert.ToString(Constants.MAX_HIGH_TEXT_LENGHT);
+                return Errors.General.ValueIsRequired("description");
 
             return new Breed(id, name, description);
         }

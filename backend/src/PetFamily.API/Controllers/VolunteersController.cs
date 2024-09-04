@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PetFamily.Application.CreateVolunteer;
+using PetFamily.API.Extensions;
+using PetFamily.Application.Volunteers.CreateVolunteer;
 
 namespace PetFamily.API.Controllers
 {
@@ -17,7 +18,7 @@ namespace PetFamily.API.Controllers
 
             if(result.IsFailure)
             {
-                return BadRequest(result.Error);
+                return result.Error.ToResponse();
             }
 
             return Ok(result.Value);

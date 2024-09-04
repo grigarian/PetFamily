@@ -1,10 +1,11 @@
-﻿using PetFamily.Domain.Enums;
+﻿using CSharpFunctionalExtensions;
+using PetFamily.Domain.Enums;
 using PetFamily.Domain.Models.PetModel;
 using PetFamily.Domain.Models.Shared;
 
 namespace PetFamily.Domain.Models.VolunteerModel
 {
-    public class Volunteer : Entity<VolunteerId>
+    public class Volunteer : Shared.Entity<VolunteerId>
     {
         private readonly List<Pet> _pets = [];
         private Volunteer(VolunteerId id) : base(id)
@@ -12,7 +13,7 @@ namespace PetFamily.Domain.Models.VolunteerModel
 
         }
 
-        public Volunteer(
+        private Volunteer(
             VolunteerId volunteerId,
             string name,
             string description,
@@ -51,7 +52,7 @@ namespace PetFamily.Domain.Models.VolunteerModel
 
         public int CountPetLookingForHelp() => _pets.Count(p => p.PetStatus == PetStatusEnum.LookingForHelp);
 
-        public static Result<Volunteer> Create (VolunteerId volunteerId,
+        public static Result<Volunteer, Error> Create (VolunteerId volunteerId,
             string name,
             string description,
             int workexp,
@@ -59,20 +60,20 @@ namespace PetFamily.Domain.Models.VolunteerModel
             SocialNetworkList socialNetworks,
             RequisiteList requisites)
         {
-            if (volunteerId == null)
-                return "Id can not be empty";
+            if (volunteerId == Guid.Empty)
+                return Errors.General.ValueIsInvalid("id");
 
             if (string.IsNullOrEmpty(name) || name.Length > Constants.MAX_LOW_TEXT_LENGHT)
-                return "Name can not be empty or longer " + Constants.MAX_LOW_TEXT_LENGHT + "symbols";
+                return Errors.General.ValueIsInvalid("name");
 
             if (string.IsNullOrEmpty(description) || description.Length > Constants.MAX_HIGH_TEXT_LENGHT)
-                return "Description can not be empty or longer " + Constants.MAX_HIGH_TEXT_LENGHT + "symbols";
+                return Errors.General.ValueIsInvalid("decription");
 
             if (workexp < 0)
-                return "Work expiriense cannot be less then 0";
+                return Errors.General.ValueIsInvalid("workExpirience");
 
             if (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Length > Constants.MAX_PHONENUMBER_LENGHT)
-                return "Phone number can not be empty or longer " + Constants.MAX_PHONENUMBER_LENGHT + "symbols";
+                return Errors.General.ValueIsInvalid("phoneNumber");
 
             return new Volunteer(
                 volunteerId,
